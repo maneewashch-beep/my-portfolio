@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 1️⃣ SEO Tags -->
+    <title>Portfolio นายมณีเวชย์ เหมาะมาศ</title>
+    <meta name="description" content="Portfolio ของนายมณีเวชย์ เหมาะมาศ นักพัฒนาเว็บไซต์และนักสร้างคอนเทนต์ดิจิทัล">
+    <meta name="keywords" content="Portfolio, มณีเวชย์, เว็บดีไซน์, PHP, HTML, CSS, JavaScript, Canva, งานถ่ายภาพ">
+    <meta name="author" content="นายมณีเวชย์ เหมาะมาศ">
+  
+    <!-- 2️⃣ Open Graph (Facebook, LINE, Messenger) -->
+    <meta property="og:title" content="Portfolio นายมณีเวชย์ เหมาะมาศ">
+    <meta property="og:description" content="นักพัฒนาเว็บไซต์และนักสร้างคอนเทนต์ดิจิทัล พร้อมประวัติการศึกษาและผลงานล่าสุด">
+    <meta property="og:image" content="nea.jpg"> <!-- รูปที่จะโชว์เวลแชร์ -->
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:type" content="website">
+  
+    <!-- 3️⃣ Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portfolio นายมณีเวชย์ เหมาะมาศ">
+    <meta name="twitter:description" content="นักพัฒนาเว็บไซต์และนักสร้างคอนเทนต์ดิจิทัล พร้อมประวัติการศึกษาและผลงานล่าสุด">
+    <meta name="twitter:image" content="nea.jpg">
+  <title>My Profile</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+      /* ซ่อน scrollbar */
+    body::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #e0e0e0;
+      overflow-y: auto; 
+
+    }
+
+    .container {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      width: 95%;
+      max-width: 900px;
+      animation: fadeIn 0.8s ease;
+      width: 95%;
+      margin: 0 auto;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header h1 {
+      text-align: center;
+      color: #ffffff;
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tabs button {
+      background: #2a2a2a;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #e0e0e0;
+      font-weight: bold;
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+    .tabs button.active, .tabs button:hover {
+      background: #444444;
+      color: #ffcc80;
+      transform: scale(1.05);
+    }
+
+    /* Profile Section */
+    .profile {
+      display: none;
+      gap: 30px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .profile.active { display: flex; }
+    .profile img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 3px solid #ffcc80;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+    .profile img:hover { transform: scale(1.05); }
+
+    .profile-info {
+      flex: 1;
+      text-align: left;
+      min-width: 200px;
+    }
+    .profile-info h2 { font-size: 28px; color: #ffffff; margin-bottom: 10px; }
+    .profile-info p {
+      font-size: 18px;
+      color: #cccccc;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+    .profile-info p:hover { color: #ffcc80; }
+
+    /* Portfolio Section */
+    .portfolio, .portfolio-pdf { display: none; }
+    .portfolio.active, .portfolio-pdf.active { display: block; }
+
+    .portfolio h2, .portfolio-pdf h2 {
+      color: #ffffff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      justify-items: center;
+    }
+    .grid div {
+      background: #2a2a2a;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+      width: 100%;
+      max-width: 180px;
+    }
+    .grid div:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+      border: 2px solid #ffcc80;
+    }
+    .grid img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .grid h3 {
+      padding: 8px;
+      text-align: center;
+      color: #ffcc80;
+      font-size: 16px;
+    }
+
+    .portfolio-pdf p {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 20px;
+      color: #cccccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      background: #1e1e1e;
+      color: #e0e0e0;
+      border-radius: 15px;
+    }
+
+    @media (max-width: 700px) {
+      .profile { flex-direction: column; align-items: center; text-align: center; }
+      .profile-info { text-align: center; }
+    }
+    @media (max-width: 700px) {
+      .profile {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .profile-info {
+        text-align: center;
+      }
+
+      .tabs button {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+      }
+    }
+
+    /* สำหรับแท็บเล็ต */
+    @media (min-width: 701px) and (max-width: 1024px) {
+      .container {
+        padding: 20px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+    }
+    .download-btn {
+      display: inline-block;
+      background: #ffcc80;
+      color: #121212;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    }
+    .download-btn:hover {
+      background: #ffaa33;
+      transform: scale(1.05);
+    }
+    .education, .work-experience {
+      background: #1e1e1e;
+      color: #cccccc;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .education h2, .work-experience h2 {
+      color: #ffcc80;
+      margin-bottom: 10px;
+    }
+
+    .education ul, .work-experience ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    .about-me {
+      background: #1e1e1e;
+      color: #cccccc;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .about-me h2, .about-me h3 {
+      color: #ffcc80;
+      margin-bottom: 10px;
+    }
+
+    .about-me ul {
+      list-style: disc;
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    html {
+      scroll-behavior: smooth; /* ทำให้เลื่อนนุ่ม */
+    }
+    
+    :root {
+      --bg-color: #121212;
+      --container-bg: #1e1e1e;
+      --text-color: #e0e0e0;
+      --secondary-text: #cccccc;
+      --highlight: #ffcc80;
+      --btn-bg: #ffcc80;
+      --btn-text: #121212;
+      --btn-hover: #ffaa33;
+      --grid-bg: #2a2a2a;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      background: var(--container-bg);
+    }
+
+    header h1 {
+      color: var(--text-color);
+    }
+
+    .tabs button {
+      background: var(--grid-bg);
+      color: var(--text-color);
+    }
+
+    .tabs button.active, .tabs button:hover {
+      background: var(--grid-bg);
+      color: var(--highlight);
+    }
+
+    .profile, .portfolio, .portfolio-pdf, .about-me, .education, .work-experience {
+      background: var(--container-bg);
+      color: var(--secondary-text);
+    }
+
+    .profile-info h2, .portfolio h2, .portfolio-pdf h2, .about-me h2, .about-me h3,
+    .education h2, .work-experience h2 {
+      color: var(--highlight);
+    }
+
+    .grid div {
+      background: var(--grid-bg);
+      border: 2px solid transparent;
+    }
+
+    .grid div:hover {
+      border: 2px solid var(--highlight);
+    }
+
+    .download-btn {
+      background: var(--btn-bg);
+      color: var(--btn-text);
+    }
+
+    .download-btn:hover {
+      background: var(--btn-hover);
+    }
+
+    .grid div {
+      background: var(--grid-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s, border 0.3s, opacity 0.6s, transform 0.6s;
+      width: 100%;
+      max-width: 180px;
+      opacity: 0; /* เริ่มต้นซ่อน */
+      transform: translateY(30px); /* เลื่อนลงเล็กน้อยก่อน */
+    }
+
+    .grid div.show {
+      opacity: 1;
+      transform: translateY(0); /* กลับตำแหน่งปกติ */
+    }
+
+  </style>
+</head>
+<body>
+  <button id="themeToggle" style="position: fixed; top: 20px; right: 20px; padding:10px 20px; border:none; border-radius:10px; cursor:pointer;">
+    🌞 Light Mode
+  </button>
+  
+  <div class="container">
+    <header>
+      <h1> Portfolio </h1>
+    </header>
+
+    <!-- Tabs -->
+    <br><div class="tabs">
+      <button id="tabProfile" class="active">ข้อมูลส่วนตัว</button>
+      <button id="tabPortfolio">ผลงานของฉัน</button>
+      <button id="tabPDF">Portfolio (PDF)</button>
+    </div>
+
+    <!-- Profile Section -->
+    <br><div class="profile active" id="profileSection">
+      <img src="nea.jpg" alt="รูปของฉัน">
+      <div class="profile-info">
+        <h2>ชื่อ-นามสกุล : นายมณีเวชย์ เหมาะมาศ</h2>
+        <p>อายุ : 20 ปี</p>
+        <p>ระดับชั้น : ปวส.2</p>
+        <p>วิทยาลัย : เทคนิคพังงา</p>
+        <p>อีเมล : maneewashch@gmail.com</p>
+      </div>
+      <!-- ข้อมูลเกี่ยวกับฉัน -->
+    <div class="about-me">
+      <h2>เกี่ยวกับฉัน</h2>
+      <p>สวัสดีครับ ผมชื่อ นายมณีเวชย์ เหมาะมาศ อายุ 20 ปี กำลังศึกษาอยู่ระดับ ปวส.2 สาขาเทคโนโลยีสารสนเทศ วิทยาลัยเทคนิคพังงา ผมมีความสนใจด้านการพัฒนาเว็บไซต์ การออกแบบกราฟิก และการสร้างคอนเทนต์ดิจิทัล ผมมีความกระตือรือร้นที่จะเรียนรู้เทคโนโลยีใหม่ ๆ และพร้อมทำงานร่วมกับทีมเพื่อสร้างผลงานที่มีคุณภาพ</p>
+
+      <br><h3>ทักษะที่มี</h3>
+      <ul>
+        <li>พัฒนาเว็บไซต์ด้วย HTML, CSS, JavaScript, PHP</li>
+        <li>ออกแบบกราฟิกด้วย Canva</li>
+        <li>ถ่ายภาพอีเว้นกิจกรรมต่าง ๆ</li>
+      </ul>
+
+      <br><h3>ความสนใจเพิ่มเติม</h3>
+      <ul>
+        <li>การตัดต่อวิดีโอและทำ MV สั้น ๆ</li>
+        <li>การเรียนรู้เทคโนโลยีใหม่ ๆ และเครื่องมือดิจิทัล</li>
+        <li>การเรียนรู้เครือข่าย Network ต่าง ๆ</li>
+      </ul>
+
+      <br><h2>ประวัติการศึกษา</h2>
+      <ul>
+        <li>ม.ต้น โรงเรียนสตรีพังงา (2019 - 2021)</li>
+        <li>ปวช. วิทยาลัยเทคนิคพังงา สาขาเทคโนโลยีสารสนเทศ (2022 - 2024)</li>
+        <li>ปวส. วิทยาลัยเทคนิคพังงา สาขาเทคโนโลยีสารสนเทศ (2025 - ปัจจุบัน)</li>
+      </ul>
+
+      <br><h2>ประวัติการทำงาน</h2>
+      <ul>
+        <li>พนักงานพาสทานร้านอาหาร (2022 - 2024)</li>
+        <li>นักศึกษาฝึกงานด้าน งานประชาสัมพันธ์ ณ กองยุทธศาสตร์และงบประมาณ สำนักงานเทศบาลเมืองพังงา (2024)</li>
+        <li>ฟรีแลนซ์การถ่ายภาพกิจกรรม งานอีเว้นต่างๆ (2024 - 2025)</li>
+      </ul>
+    </div>
+    </div>
+
+    
+
+    <!-- Portfolio Section -->
+    <div class="portfolio" id="portfolioSection">
+      <h2>ผลงานล่าสุด</h2>
+      <div id="gallery" class="grid"></div>
+      <div id="gallery">
+        <p style="text-align:center; color: var(--secondary-text); margin-top:20px;">
+          📂 ยังไม่มีผลงานล่าสุด
+        </p>
+      </div>
+    </div>
+
+    <!-- Portfolio PDF Section -->
+    <div class="portfolio-pdf" id="pdfSection">
+      <h2>Portfolio (PDF)</h2>
+      <p>📄 คลิกที่นี่เพื่อดาวน์โหลด Portfolio ของฉัน</p>
+      <p>
+        <a href="portfolio.pdf" download class="download-btn">📥 ดาวน์โหลด Portfolio PDF</a>
+      </p>
+    </div>
+
+    <footer>
+      © 2025 My Portfolio
+    </footer>
+  </div>
+
+  <script>
+    // ตรวจจับเมื่อภาพปรากฏใน viewport
+    const portfolioItems = document.querySelectorAll('.grid div');
+
+    function checkScroll() {
+      portfolioItems.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 50) {
+          item.classList.add('show');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('load', checkScroll);
+
+
+    const themeToggle = document.getElementById('themeToggle');
+
+    let darkMode = true;
+
+    themeToggle.addEventListener('click', () => {
+      if(darkMode) {
+        document.documentElement.style.setProperty('--bg-color', '#f4f4f4');
+        document.documentElement.style.setProperty('--container-bg', '#ffffff');
+        document.documentElement.style.setProperty('--text-color', '#121212');
+        document.documentElement.style.setProperty('--secondary-text', '#555555');
+        document.documentElement.style.setProperty('--highlight', '#ff8800');
+        document.documentElement.style.setProperty('--btn-bg', '#ff8800');
+        document.documentElement.style.setProperty('--btn-text', '#ffffff');
+        document.documentElement.style.setProperty('--btn-hover', '#ffaa33');
+        document.documentElement.style.setProperty('--grid-bg', '#dddddd');
+        themeToggle.textContent = '🌙 Dark Mode';
+        darkMode = false;
+      } else {
+        document.documentElement.style.setProperty('--bg-color', '#121212');
+        document.documentElement.style.setProperty('--container-bg', '#1e1e1e');
+        document.documentElement.style.setProperty('--text-color', '#e0e0e0');
+        document.documentElement.style.setProperty('--secondary-text', '#cccccc');
+        document.documentElement.style.setProperty('--highlight', '#ffcc80');
+        document.documentElement.style.setProperty('--btn-bg', '#ffcc80');
+        document.documentElement.style.setProperty('--btn-text', '#121212');
+        document.documentElement.style.setProperty('--btn-hover', '#ffaa33');
+        document.documentElement.style.setProperty('--grid-bg', '#2a2a2a');
+        themeToggle.textContent = '🌞 Light Mode';
+        darkMode = true;
+      }
+    });
+
+    // Tabs
+    const tabProfile = document.getElementById('tabProfile');
+    const tabPortfolio = document.getElementById('tabPortfolio');
+    const tabPDF = document.getElementById('tabPDF');
+    const profileSection = document.getElementById('profileSection');
+    const portfolioSection = document.getElementById('portfolioSection');
+    const pdfSection = document.getElementById('pdfSection');
+
+    function clearActive() {
+      tabProfile.classList.remove('active');
+      tabPortfolio.classList.remove('active');
+      tabPDF.classList.remove('active');
+      profileSection.classList.remove('active');
+      portfolioSection.classList.remove('active');
+      pdfSection.classList.remove('active');
+    }
+
+    tabProfile.addEventListener('click', () => {
+      clearActive();
+      tabProfile.classList.add('active');
+      profileSection.classList.add('active');
+    });
+
+    tabPortfolio.addEventListener('click', () => {
+      clearActive();
+      tabPortfolio.classList.add('active');
+      portfolioSection.classList.add('active');
+      loadCertificates();
+    });
+
+    tabPDF.addEventListener('click', () => {
+      clearActive();
+      tabPDF.classList.add('active');
+      pdfSection.classList.add('active');
+    });
+
+    // Load Portfolio
+    async function loadCertificates() {
+      try {
+        const res = await fetch("../backend/controllers/fetch.php");
+        const data = await res.json();
+        const gallery = document.getElementById("gallery");
+
+        gallery.innerHTML = "";
+        data.forEach(item => {
+          const div = document.createElement("div");
+          div.innerHTML = `
+            <img src="${item.file_path}" alt="${item.title}">
+            <h3>${item.title}</h3>
+          `;
+          gallery.appendChild(div);
+        });
+      } catch (err) {
+        console.error("ไม่สามารถโหลดผลงานได้:", err);
+      }
+    }
+  </script>
+</body>
+</html>
