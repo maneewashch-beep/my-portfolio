@@ -21,7 +21,11 @@
     <meta name="twitter:title" content="Portfolio นายมณีเวชย์ เหมาะมาศ">
     <meta name="twitter:description" content="นักพัฒนาเว็บไซต์และนักสร้างคอนเทนต์ดิจิทัล พร้อมประวัติการศึกษาและผลงานล่าสุด">
     <meta name="twitter:image" content="nea.jpg">
-  <title>My Profile</title>
+  <!-- Google Font: Noto Sans Thai for better Thai rendering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Title already declared above in Thai for SEO -->
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,27 +36,28 @@
       background: transparent;
     }
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Noto Sans Thai', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
       background: #121212;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       color: #e0e0e0;
-      overflow-y: auto; 
+      overflow-y: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
 
     }
 
     .container {
       background: #1e1e1e;
-      padding: 30px;
-      border-radius: 20px;
+      padding: 28px;
+      border-radius: 18px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       width: 95%;
-      max-width: 900px;
+      max-width: 920px;
       animation: fadeIn 0.8s ease;
-      width: 95%;
-      margin: 0 auto;
+      margin: 18px auto;
     }
 
     @keyframes fadeIn {
@@ -79,11 +84,14 @@
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.18s ease;
       color: #e0e0e0;
-      font-weight: bold;
-      padding: 10px 15px;
-      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 16px;
+      font-size: 15px;
+      min-width: 110px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
     .tabs button.active, .tabs button:hover {
       background: #444444;
@@ -114,6 +122,7 @@
       text-align: left;
       min-width: 200px;
     }
+    .profile-info p { line-height: 1.5; }
     .profile-info h2 { font-size: 28px; color: #ffffff; margin-bottom: 10px; }
     .profile-info p {
       font-size: 18px;
@@ -147,6 +156,7 @@
       transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
       width: 100%;
       max-width: 180px;
+      padding-bottom: 6px;
     }
     .grid div:hover {
       transform: translateY(-5px);
@@ -207,15 +217,128 @@
     }
   }
 
+  /* Small phones — make everything more touch-friendly and readable */
+  @media (max-width: 480px) {
+    .container {
+      padding: 18px;
+      border-radius: 14px;
+    }
+
+    header h1 {
+      font-size: 30px;
+      line-height: 1.1;
+    }
+
+    .tabs {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+
+    .tabs button {
+      width: 100%;
+      padding: 16px 18px;
+      font-size: 18px;
+      min-width: 0;
+      border-radius: 12px;
+      line-height: 1.2;
+    }
+
+    .profile img {
+      width: 140px;
+      height: 140px;
+    }
+
+    .profile-info h2 { font-size: 22px; line-height: 1.1; }
+    .profile-info p { font-size: 18px; line-height: 1.5; }
+
+    .about-me, .education, .work-experience {
+      padding: 16px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .about-me ul, .education ul, .work-experience ul {
+      font-size: 15.5px;
+      line-height: 1.6;
+    }
+
+    .grid img { height: 140px; }
+
+    .grid h3 { font-size: 16px; padding: 10px 8px; }
+
+    footer { font-size: 15px; }
+  }
+
   /* สำหรับแท็บเล็ต */
   @media (min-width: 701px) and (max-width: 1024px) {
     .container {
-      padding: 20px;
+      padding: 26px;
+      max-width: 820px;
+    }
+
+    header h1 {
+      font-size: 32px;
+    }
+
+    .profile img {
+      width: 190px;
+      height: 190px;
+    }
+
+    .profile-info h2 { font-size: 24px; }
+    .profile-info p { font-size: 16px; }
+
+    .tabs button {
+      padding: 12px 16px;
+      font-size: 15px;
     }
 
     .grid {
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
     }
+
+    .grid img { height: 160px; }
+  }
+  
+  /* Desktop and large screens */
+  @media (min-width: 1025px) {
+    .container {
+      max-width: 1100px;
+      padding: 36px;
+    }
+
+    header h1 {
+      font-size: 44px;
+    }
+
+    .profile {
+      gap: 36px;
+    }
+
+    .profile img {
+      width: 220px;
+      height: 220px;
+    }
+
+    .profile-info h2 { font-size: 32px; }
+    .profile-info p { font-size: 18px; }
+
+    .tabs button {
+      padding: 12px 20px;
+      font-size: 16px;
+      min-width: 140px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .grid img { height: 180px; }
+
+    footer { font-size: 16px; padding: 18px; }
   }
     .download-btn {
       display: inline-block;
@@ -359,7 +482,7 @@
   </style>
 </head>
 <body>
-  <button id="themeToggle" style="position: fixed; top: 20px; right: 20px; padding:10px 20px; border:none; border-radius:10px; cursor:pointer;">
+  <button id="themeToggle" aria-label="Toggle theme" style="position: fixed; top: 18px; right: 18px; padding:10px 16px; border:none; border-radius:10px; cursor:pointer; font-weight:700;">
     🌞 Light Mode
   </button>
   
@@ -425,12 +548,8 @@
     <!-- Portfolio Section -->
     <div class="portfolio" id="portfolioSection">
       <h2>ผลงานล่าสุด</h2>
-      <div id="gallery" class="grid"></div>
-      <div id="gallery">
-        <p style="text-align:center; color: var(--secondary-text); margin-top:20px;">
-          📂 ยังไม่มีผลงานล่าสุด
-        </p>
-      </div>
+      <div id="gallery" class="grid" aria-live="polite"></div>
+      <p id="galleryEmpty" class="empty-message" style="text-align:center; color: var(--secondary-text); margin-top:20px;">📂 ยังไม่มีผลงานล่าสุด</p>
     </div>
 
     <!-- Portfolio PDF Section -->
@@ -449,13 +568,15 @@
 
   <script>
     // ตรวจจับเมื่อภาพปรากฏใน viewport
-    const portfolioItems = document.querySelectorAll('.grid div');
+    const galleryEmpty = document.getElementById('galleryEmpty');
 
     function checkScroll() {
-      portfolioItems.forEach(item => {
+      const portfolioItems = document.querySelectorAll('.grid div');
+      portfolioItems.forEach((item, i) => {
         const rect = item.getBoundingClientRect();
-        if(rect.top < window.innerHeight - 50) {
-          item.classList.add('show');
+        if(rect.top < window.innerHeight - 60) {
+          // staggered reveal for nicer effect on phones
+          setTimeout(() => item.classList.add('show'), i * 80);
         }
       });
     }
@@ -538,16 +659,25 @@
         const res = await fetch("../backend/controllers/fetch.php");
         const data = await res.json();
         const gallery = document.getElementById("gallery");
-
         gallery.innerHTML = "";
-        data.forEach(item => {
-          const div = document.createElement("div");
-          div.innerHTML = `
-            <img src="${item.file_path}" alt="${item.title}">
-            <h3>${item.title}</h3>
-          `;
-          gallery.appendChild(div);
-        });
+        if(!data || data.length === 0) {
+          galleryEmpty.style.display = 'block';
+        } else {
+          galleryEmpty.style.display = 'none';
+          data.forEach((item, idx) => {
+            const div = document.createElement("div");
+            div.innerHTML = `
+              <img src="${item.file_path}" alt="${item.title}">
+              <h3>${item.title}</h3>
+            `;
+            // ensure newly added items participate in the reveal
+            gallery.appendChild(div);
+            // small stagger so items don't all pop at once on mobile
+            setTimeout(() => div.classList.add('show'), idx * 80);
+          });
+          // run checkScroll to catch any remaining items
+          setTimeout(checkScroll, 200);
+        }
       } catch (err) {
         console.error("ไม่สามารถโหลดผลงานได้:", err);
       }
