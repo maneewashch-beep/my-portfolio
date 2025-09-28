@@ -217,16 +217,18 @@
     }
   }
 
-  /* Small phones — make everything more touch-friendly and readable */
+  /* Small phones — make everything more touch-friendly and readable, text left-aligned */
   @media (max-width: 480px) {
     .container {
       padding: 18px;
       border-radius: 14px;
     }
 
+    /* Left-align main content for readability on phones */
     header h1 {
       font-size: 30px;
       line-height: 1.1;
+      text-align: left;
     }
 
     .tabs {
@@ -235,6 +237,7 @@
       gap: 8px;
     }
 
+    /* keep tab button text centered (good for touch targets) */
     .tabs button {
       width: 100%;
       padding: 16px 18px;
@@ -242,6 +245,7 @@
       min-width: 0;
       border-radius: 12px;
       line-height: 1.2;
+      text-align: center;
     }
 
     .profile img {
@@ -249,25 +253,49 @@
       height: 140px;
     }
 
-    .profile-info h2 { font-size: 22px; line-height: 1.1; }
-    .profile-info p { font-size: 18px; line-height: 1.5; }
+    /* override the broader 700px centered rules: make text left-aligned on small phones */
+    .profile { text-align: left; }
+    .profile-info { text-align: left; }
+    .profile-info h2 { font-size: 22px; line-height: 1.1; text-align: left; }
+    .profile-info p { font-size: 18px; line-height: 1.5; text-align: left; }
 
     .about-me, .education, .work-experience {
       padding: 16px;
       font-size: 16px;
       line-height: 1.6;
+      text-align: left;
     }
 
     .about-me ul, .education ul, .work-experience ul {
       font-size: 15.5px;
       line-height: 1.6;
+      text-align: left;
     }
 
-    .grid img { height: 140px; }
+    /* single-column cards on phones for focus and readability */
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
 
-    .grid h3 { font-size: 16px; padding: 10px 8px; }
+    .grid div {
+      max-width: none;
+      width: 100%;
+      border-radius: 14px;
+      padding-bottom: 6px;
+    }
 
-    footer { font-size: 15px; }
+    .grid img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
+    .grid h3 { font-size: 17px; padding: 12px 10px; text-align: left; }
+
+    footer { font-size: 15px; text-align: center; }
   }
 
   /* สำหรับแท็บเล็ต */
@@ -418,6 +446,9 @@
 
     .container {
       background: var(--container-bg);
+      /* subtle layered background for nicer mobile look */
+      background-image: linear-gradient(180deg, rgba(255,204,128,0.03), transparent 40%), radial-gradient(1200px 300px at 10% 10%, rgba(255,204,128,0.02), transparent 20%);
+      backdrop-filter: blur(0.2px);
     }
 
     header h1 {
@@ -462,16 +493,23 @@
       background: var(--btn-hover);
     }
 
+
     .grid div {
       background: var(--grid-bg);
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-      transition: transform 0.3s, box-shadow 0.3s, border 0.3s, opacity 0.6s, transform 0.6s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, opacity 0.6s ease, transform 0.6s ease;
       width: 100%;
       max-width: 180px;
       opacity: 0; /* เริ่มต้นซ่อน */
       transform: translateY(30px); /* เลื่อนลงเล็กน้อยก่อน */
+    }
+
+    /* touch feedback for cards */
+    .grid div:active {
+      transform: translateY(0) scale(0.995);
+      transition: transform 0.12s ease;
     }
 
     .grid div.show {
@@ -502,7 +540,7 @@
     <br><div class="profile active" id="profileSection">
       <img src="nea.jpg" alt="รูปของฉัน">
       <div class="profile-info">
-        <h2>ชื่อ-นามสกุล : นายมณีเวชย์ เหมาะมาศ</h2>
+        <h2>นายมณีเวชย์ เหมาะมาศ</h2>
         <p>อายุ : 20 ปี</p>
         <p>ระดับชั้น : ปวส.2</p>
         <p>วิทยาลัย : เทคนิคพังงา</p>
@@ -570,19 +608,37 @@
     // ตรวจจับเมื่อภาพปรากฏใน viewport
     const galleryEmpty = document.getElementById('galleryEmpty');
 
-    function checkScroll() {
-      const portfolioItems = document.querySelectorAll('.grid div');
-      portfolioItems.forEach((item, i) => {
-        const rect = item.getBoundingClientRect();
-        if(rect.top < window.innerHeight - 60) {
-          // staggered reveal for nicer effect on phones
-          setTimeout(() => item.classList.add('show'), i * 80);
+    // Use IntersectionObserver for performant reveal (works with dynamic content)
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.08
+    };
+
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          const el = entry.target;
+          el.classList.add('show');
+          // remove delay style after shown to avoid lingering styles
+          el.style.transitionDelay = '';
+          obs.unobserve(el);
         }
+      });
+    }, observerOptions);
+
+    // helper to observe all current or newly created items with optional stagger
+    function observeGalleryItems() {
+      const items = document.querySelectorAll('.grid div');
+      items.forEach((el, i) => {
+        // apply a small stagger on initial observation
+        el.style.transitionDelay = (i * 60) + 'ms';
+        revealObserver.observe(el);
       });
     }
 
-    window.addEventListener('scroll', checkScroll);
-    window.addEventListener('load', checkScroll);
+    // observe items already on page
+    document.addEventListener('DOMContentLoaded', observeGalleryItems);
 
 
     const themeToggle = document.getElementById('themeToggle');
