@@ -48,11 +48,10 @@
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      width: 95%;
-      max-width: 900px;
+      width: 90%;
+      max-width: 1000px;
       animation: fadeIn 0.8s ease;
-      width: 95%;
-      margin: 0 auto;
+      margin: 20px auto;
     }
 
     @keyframes fadeIn {
@@ -186,37 +185,37 @@
       .profile-info { text-align: center; }
     }
     @media (max-width: 700px) {
-      .profile {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .profile-info {
-        text-align: center;
-      }
-
-      .tabs button {
-        padding: 8px 12px;
-        font-size: 13px;
-      }
-
-      .grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 10px;
-      }
+    .profile {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
-    /* สำหรับแท็บเล็ต */
-    @media (min-width: 701px) and (max-width: 1024px) {
-      .container {
-        padding: 20px;
-      }
-
-      .grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      }
+    .profile-info {
+      text-align: center;
     }
+
+    .tabs button {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+    }
+  }
+
+  /* สำหรับแท็บเล็ต */
+  @media (min-width: 701px) and (max-width: 1024px) {
+    .container {
+      padding: 20px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+  }
     .download-btn {
       display: inline-block;
       background: #ffcc80;
